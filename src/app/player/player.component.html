@@ -1,0 +1,40 @@
+<div class="max-w-6xl mx-auto mt-10 px-4">
+  <div class="flex justify-between items-center mb-6">
+    <h2 class="text-2xl font-bold text-green-700">Player List</h2>
+    <button (click)="create()" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md">
+      Add New Player
+    </button>
+  </div>
+
+  <div *ngIf="loading" class="text-gray-600 italic">Loading players...</div>
+  <div *ngIf="error" class="text-red-600 mb-4">{{ error }}</div>
+
+  <div *ngIf="players.length > 0" class="overflow-x-auto">
+    <table class="min-w-full bg-white border rounded-lg shadow-md">
+      <thead class="bg-green-100">
+        <tr>
+          <th class="py-2 px-4 text-left">Name</th>
+          <th class="py-2 px-4 text-left">Position</th>
+          <th class="py-2 px-4 text-left">Number</th>
+          <th class="py-2 px-4 text-left">Team ID</th>
+          <th class="py-2 px-4 text-left">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let player of players" class="border-t">
+          <td class="py-2 px-4">{{ player.name }}</td>
+          <td class="py-2 px-4">{{ player.position }}</td>
+          <td class="py-2 px-4">{{ player.number }}</td>
+          <td class="py-2 px-4">{{ player.teamId }}</td>
+          <td class="py-2 px-4 space-x-2">
+            <button (click)="view(player.id)" class="text-green-600 hover:underline">View</button>
+            <button (click)="edit(player.id)" class="text-blue-600 hover:underline">Edit</button>
+            <button (click)="deletePlayer(player.id)" class="text-red-600 hover:underline">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p *ngIf="!loading && players.length === 0" class="text-gray-600 mt-4">No players found.</p>
+</div>

@@ -1,0 +1,16 @@
+<div *ngIf="loading" class="text-gray-600 italic">Loading...</div>
+<div *ngIf="error" class="text-red-600">{{ error }}</div>
+
+<div *ngIf="player" class="bg-white rounded-xl shadow-md p-6 max-w-md mx-auto mt-6">
+  <h2 class="text-2xl font-bold text-green-700 mb-4">Player Details</h2>
+  
+  <p class="mb-2"><span class="font-semibold text-gray-700">Name:</span> {{ player.name }}</p>
+  <p class="mb-2"><span class="font-semibold text-gray-700">Position:</span> {{ player.position }}</p>
+  <p class="mb-2"><span class="font-semibold text-gray-700">Number:</span> {{ player.number }}</p>
+  <p class="mb-4"><span class="font-semibold text-gray-700">Team ID:</span> {{ player.teamId }}</p>
+
+  <div class="flex gap-3">
+    <button (click)="goBack()" class="bg-gray-300 hover:bg-gray-400 text-black px-4 py-2 rounded-md">Back</button>
+    <button (click)="edit()" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md">Edit</button>
+  </div>
+</div>

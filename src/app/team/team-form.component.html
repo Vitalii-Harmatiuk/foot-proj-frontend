@@ -1,0 +1,48 @@
+<h2 class="text-2xl font-bold text-green-800 mb-6" *ngIf="isEditMode">Edit Team</h2>
+<h2 class="text-2xl font-bold text-green-800 mb-6" *ngIf="!isEditMode">Create New Team</h2>
+
+<form [formGroup]="teamForm" (ngSubmit)="onSubmit()" class="space-y-4 bg-white p-6 rounded-lg shadow-md border border-green-300">
+
+  <div>
+    <label class="block text-green-700 font-semibold mb-1">Name:</label>
+    <input formControlName="name" class="w-full px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-green-500" />
+    <div *ngIf="teamForm.get('name')?.invalid && teamForm.get('name')?.touched" class="text-red-500 text-sm">
+      Name is required
+    </div>
+  </div>
+
+  <div>
+    <label class="block text-green-700 font-semibold mb-1">Country:</label>
+    <input formControlName="country" class="w-full px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-green-500" />
+    <div *ngIf="teamForm.get('country')?.invalid && teamForm.get('country')?.touched" class="text-red-500 text-sm">
+      Country is required
+    </div>
+  </div>
+
+  <div>
+    <label class="block text-green-700 font-semibold mb-1">Founded:</label>
+    <input type="number" formControlName="founded" class="w-full px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-green-500" />
+    <div *ngIf="teamForm.get('founded')?.invalid && teamForm.get('founded')?.touched" class="text-red-500 text-sm">
+      Founded year must be valid
+    </div>
+  </div>
+
+  <div class="flex gap-4 mt-4">
+    <button
+      type="submit"
+      [disabled]="teamForm.invalid || loading"
+      class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded disabled:opacity-50"
+    >
+      {{ isEditMode ? 'Update' : 'Create' }}
+    </button>
+    <button
+      type="button"
+      [routerLink]="['/teams']"
+      class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-4 py-2 rounded"
+    >
+      Cancel
+    </button>
+  </div>
+</form>
+
+<div *ngIf="error" class="text-red-600 font-semibold mt-4">{{ error }}</div>

@@ -1,0 +1,19 @@
+<div *ngIf="loading" class="text-green-700">Loading match details...</div>
+<div *ngIf="error" class="text-red-600 font-semibold">{{ error }}</div>
+
+<div *ngIf="match" class="bg-green-50 border border-green-200 rounded-xl p-6 shadow-md space-y-4">
+  <h2 class="text-2xl font-bold text-green-800">Match Detail</h2>
+  <p><strong>Date:</strong> {{ match.date | date:'shortDate' }}</p>
+  <p><strong>Home Team:</strong> {{ match.homeTeam }}</p>
+  <p><strong>Away Team:</strong> {{ match.awayTeam }}</p>
+  <p><strong>Score:</strong> {{ match.score || 'Not played yet' }}</p>
+
+  <div class="flex space-x-3 mt-4">
+    <button [routerLink]="['/matches/edit', match.id]" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">
+      Edit
+    </button>
+    <button [routerLink]="['/matches']" class="bg-gray-200 text-gray-800 px-4 py-2 rounded hover:bg-gray-300">
+      Back to list
+    </button>
+  </div>
+</div>

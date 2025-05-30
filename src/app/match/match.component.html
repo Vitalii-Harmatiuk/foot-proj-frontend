@@ -1,0 +1,37 @@
+<div *ngIf="loading" class="text-green-700">Loading matches...</div>
+<div *ngIf="error" class="text-red-600 font-semibold">{{ error }}</div>
+
+<div *ngIf="matches.length > 0" class="overflow-x-auto mt-4">
+  <table class="min-w-full border-collapse bg-white shadow rounded-xl overflow-hidden">
+    <thead class="bg-green-100 text-green-900">
+      <tr>
+        <th class="px-4 py-2 text-left">Date</th>
+        <th class="px-4 py-2 text-left">Home Team</th>
+        <th class="px-4 py-2 text-left">Away Team</th>
+        <th class="px-4 py-2 text-left">Score</th>
+        <th class="px-4 py-2 text-left">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let match of matches" class="border-t hover:bg-green-50">
+        <td class="px-4 py-2">{{ match.date | date }}</td>
+        <td class="px-4 py-2">{{ match.homeTeam }}</td>
+        <td class="px-4 py-2">{{ match.awayTeam }}</td>
+        <td class="px-4 py-2">{{ match.score || 'N/A' }}</td>
+        <td class="px-4 py-2 space-x-2">
+          <button [routerLink]="['/matches', match.id]" class="text-sm bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600">View</button>
+          <button [routerLink]="['/matches/edit', match.id]" class="text-sm bg-yellow-400 text-gray-900 px-3 py-1 rounded hover:bg-yellow-500">Edit</button>
+          <button (click)="deleteMatch(match.id)" class="text-sm bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div *ngIf="!loading && matches.length === 0" class="text-gray-600 mt-4">
+  No matches found.
+</div>
+
+<button [routerLink]="['/matches/new']" class="mt-6 bg-green-700 text-white px-6 py-2 rounded hover:bg-green-800">
+  Add New Match
+</button>
